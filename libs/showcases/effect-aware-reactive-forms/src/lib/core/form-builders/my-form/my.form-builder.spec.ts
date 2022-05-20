@@ -1,22 +1,31 @@
 import { MyFormBuilder } from './my.form-builder';
-import { format } from 'date-fns';
-import { BehaviorSubject } from 'rxjs';
-import { State } from '../../models/state.model';
+import { TestBed } from '@angular/core/testing';
+import { ShowcasesEffectAwareReactiveFormsModule } from '../../../showcases-effect-aware-reactive-forms.module';
+import { CitiesApiClient } from '../../api-clients/cities.api-client';
+import {
+    HttpClientTestingModule,
+    HttpTestingController,
+} from '@angular/common/http/testing';
+import { StateService } from '../../state/state.service';
 
 describe('MyFormBuilder', () => {
-    let builder: MyFormBuilder;
-    let state$: BehaviorSubject<State>;
+    let stateService: StateService;
+    let httpTestingControler: HttpTestingController;
+
     let form$: MyFormBuilder['form'];
 
     beforeEach(() => {
-        state$ = new BehaviorSubject<State>({
-            userData: null,
+        TestBed.configureTestingModule({
+            imports: [
+                ShowcasesEffectAwareReactiveFormsModule,
+                HttpClientTestingModule,
+            ],
         });
-        builder = new MyFormBuilder({
-            get data$() {
-                return state$;
-            },
-        });
+
+        stateService = TestBed.inject(StateService);
+        httpTestingControler = TestBed.inject(HttpTestingController);
+        TestBed.inject(CitiesApiClient).setFixtureMode(false);
+        const builder = TestBed.inject(MyFormBuilder);
         form$ = builder.form;
     });
 
@@ -25,29 +34,17 @@ describe('MyFormBuilder', () => {
         expect(form$.value).toBeTruthy();
     });
 
-    it('initializes the value', () => {
-        form$.subscribe();
-        expect(form$.value.value).toEqual({
-            address: {
-                city: '',
-                street: '',
-                zipCode: '',
-            },
-            time: format(new Date(), 'HH:mm'),
-        });
-    });
-
     it('shows the address group on logout', () => {
         form$.subscribe();
-        state$.next({
+        stateService.data$.next({
             userData: null,
         });
         expect(form$.value.get('address')?.prop('visible')).toEqual(true);
     });
 
-    it('hides the address group on login', () => {
+    it('hides the address group on login', async () => {
         form$.subscribe();
-        state$.next({
+        stateService.data$.next({
             userData: {
                 zipCode: '12345',
                 city: 'sewfefwef',
@@ -55,5 +52,15 @@ describe('MyFormBuilder', () => {
             },
         });
         expect(form$.value.get('address')?.prop('visible')).toEqual(false);
+    });
+
+    it('loads available cities from the api', async () => {
+        form$.subscribe();
+        form$.value.get('address.zipCode')?.setValue('12435');
+        httpTestingControler.expectOne('/some/api/path').flush(['Berlin']);
+        expect(form$.value.get('address.city')?.prop('options')).toEqual([
+            'Berlin',
+        ]);
+        httpTestingControler.verify();
     });
 });

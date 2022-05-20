@@ -1,20 +1,17 @@
 import { map, Observable } from 'rxjs';
-import {
-    FormEffect,
-    FormGroupWithProps,
-} from '@kbru-os/effect-aware-reactive-forms';
+import { FormEffect } from '@kbru-os/effect-aware-reactive-forms';
 import { State } from '../../../models/state.model';
-import { Props } from '../my.form-builder';
+import { FormGroup } from '../../../types/form-group.type';
 
 export const toggleAddressGroupFormEffect =
-    (state$: Observable<State>): FormEffect<FormGroupWithProps<Props>> =>
+    (state$: Observable<State>): FormEffect<FormGroup> =>
     (formGroup) =>
         state$.pipe(
             map((state) => {
                 if (!state.userData) {
-                    formGroup.setProp('visible', true);
+                    formGroup.get('address')?.setProp('visible', true);
                 } else {
-                    formGroup.setProp('visible', false);
+                    formGroup.get('address')?.setProp('visible', false);
                 }
             })
         );

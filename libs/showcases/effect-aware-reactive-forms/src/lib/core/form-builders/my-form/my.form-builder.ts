@@ -4,14 +4,12 @@ import {
     FormControlWithProps,
     FormGroupWithProps,
 } from '@kbru-os/effect-aware-reactive-forms';
-import { toggleFormFormEffect } from './effects/toggle-form.form-effect';
-import { setInitialValueFormEffect } from './effects/set-initial-value.form-effect';
 import { StateService } from '../../state/state.service';
 import { BehaviorSubject, map } from 'rxjs';
 import { toggleAddressGroupFormEffect } from './effects/toggle-address-group.form-effect';
 import { FormGroup } from '../../types/form-group.type';
 import { preFillUserDataFormEffect } from './effects/pre-fill-user-data.form-effect';
-import { loadCityOptionsFormEffect } from './effects/load-city-options.form-effect';
+import { cityOptionsFormEffect } from './effects/city-options.form-effect';
 import { CitiesApiClient } from '../../api-clients/cities.api-client';
 
 export interface Props {
@@ -36,9 +34,10 @@ export class MyFormBuilder {
                 }
             ),
             [
-                toggleAddressGroupFormEffect(this.stateService.data$),
                 preFillUserDataFormEffect(this.stateService.data$),
-                loadCityOptionsFormEffect(this.citiesApiClient.fetch),
+                cityOptionsFormEffect((zipCode) =>
+                    this.citiesApiClient.fetch(zipCode)
+                ),
             ]
         );
         const form = new FormGroupWithProps<Props>(
@@ -48,12 +47,10 @@ export class MyFormBuilder {
                 address: addressForm.value,
             }
         );
-        form.setProp('visible', false);
 
         return createEffectAwareForm(form, [
             () => addressForm.pipe(map(() => undefined)),
-            toggleFormFormEffect,
-            setInitialValueFormEffect(this.stateService),
+            toggleAddressGroupFormEffect(this.stateService.data$),
         ]);
     }
 }

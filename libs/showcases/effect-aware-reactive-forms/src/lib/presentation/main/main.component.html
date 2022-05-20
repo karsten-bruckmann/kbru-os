@@ -5,7 +5,7 @@
         <div *ngIf="form.get('address')?.prop('visible')" formGroupName="address">
             <input formControlName="zipCode"/>
             <select formControlName="city">
-                <option value="">Bitte wählen</option>
+                <option *ngIf="!form.get('address.city')?.value" value="">Bitte wählen</option>
                 <ng-container *ngIf="form.get('address.city')?.prop('options') as options">
                     <option *ngFor="let option of options">{{option}}</option>
                 </ng-container>
