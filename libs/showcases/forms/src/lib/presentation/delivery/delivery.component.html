@@ -1,9 +1,9 @@
 <div class="form-row">
     <label>Already registered?</label>
-    <button *ngIf="!stateService.data$.value.userData" (click)="login()">
+    <button *ngIf="(user$ | async) === null" (click)="login()">
         Login
     </button>
-    <button *ngIf="stateService.data$.value.userData" (click)="logout()">
+    <button *ngIf="user$ | async" (click)="logout()">
         Logout
     </button>
 </div>

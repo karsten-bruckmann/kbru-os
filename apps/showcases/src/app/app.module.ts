@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
     declarations: [AppComponent],
@@ -14,7 +15,7 @@ import { EffectsModule } from '@ngrx/effects';
         HttpClientModule,
         RouterModule.forRoot([
             {
-                path: 'effect-aware-reactive-forms',
+                path: 'forms',
                 loadChildren: () =>
                     import('@kbru/showcases-forms').then(
                         (m) => m.ShowcasesFormsModule
@@ -22,6 +23,7 @@ import { EffectsModule } from '@ngrx/effects';
             },
         ]),
         StoreModule.forRoot({}),
+        StoreDevtoolsModule.instrument({ maxAge: 50 }),
         EffectsModule.forRoot([]),
     ],
     bootstrap: [AppComponent],
