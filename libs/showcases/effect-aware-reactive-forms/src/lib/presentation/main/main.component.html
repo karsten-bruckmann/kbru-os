@@ -1,12 +1,17 @@
 <form *ngIf="form$ | async as form" [formGroup]="form">
     <ng-container *ngIf="form.prop('visible')">
-    <input formControlName="time" type="time"/>
+        <input formControlName="time" type="time"/>
 
-    <div *ngIf="form.get('address')?.prop('visible')" formGroupName="address">
-        <input formControlName="zipCode"/>
-        <input formControlName="street"/>
-        <input formControlName="city"/>
-    </div>
+        <div *ngIf="form.get('address')?.prop('visible')" formGroupName="address">
+            <input formControlName="zipCode"/>
+            <select formControlName="city">
+                <option value="">Bitte wählen</option>
+                <ng-container *ngIf="form.get('address.city')?.prop('options') as options">
+                    <option *ngFor="let option of options">{{option}}</option>
+                </ng-container>
+            </select>
+            <input formControlName="street"/>
+        </div>
     </ng-container>
 
     <pre>Form Value: {{form.value | json}}</pre>

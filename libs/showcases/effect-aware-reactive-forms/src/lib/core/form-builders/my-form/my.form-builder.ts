@@ -11,6 +11,8 @@ import { BehaviorSubject, map } from 'rxjs';
 import { toggleAddressGroupFormEffect } from './effects/toggle-address-group.form-effect';
 import { FormGroup } from '../../types/form-group.type';
 import { preFillUserDataFormEffect } from './effects/pre-fill-user-data.form-effect';
+import { loadCityOptionsFormEffect } from './effects/load-city-options.form-effect';
+import { CitiesApiClient } from '../../api-clients/cities.api-client';
 
 export interface Props {
     visible: boolean;
@@ -18,7 +20,10 @@ export interface Props {
 
 @Injectable({ providedIn: 'root' })
 export class MyFormBuilder {
-    constructor(private stateService: StateService) {}
+    constructor(
+        private stateService: StateService,
+        private citiesApiClient: CitiesApiClient
+    ) {}
 
     public get form(): BehaviorSubject<FormGroup> {
         const addressForm = createEffectAwareForm<FormGroup>(
@@ -33,6 +38,7 @@ export class MyFormBuilder {
             [
                 toggleAddressGroupFormEffect(this.stateService.data$),
                 preFillUserDataFormEffect(this.stateService.data$),
+                loadCityOptionsFormEffect(this.citiesApiClient.fetch),
             ]
         );
         const form = new FormGroupWithProps<Props>(
