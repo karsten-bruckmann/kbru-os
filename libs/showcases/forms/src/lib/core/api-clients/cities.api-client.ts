@@ -1,30 +1,21 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { CitiesResponse } from './cities.response';
 
 @Injectable({ providedIn: 'root' })
 export class CitiesApiClient {
     constructor(private http: HttpClient) {}
 
-    private fixtures: Record<string, string[]> = {
-        '12435': ['Berlin'],
-        '00000': ['You', 'Found', 'An', 'Easter', 'Egg'],
-    };
-    private fixtureMode = true;
-
-    public setFixtureMode(mode: boolean) {
-        this.fixtureMode = mode;
-    }
+    private baseUrl = 'https://api.zippopotam.us/de/';
 
     public fetch(zipCode: string): Observable<string[]> {
-        if (this.fixtureMode) {
-            return of(this.fromFixtures(zipCode));
-        }
-
-        return this.http.get<string[]>('/some/api/path');
-    }
-
-    private fromFixtures(zipCode: string): string[] {
-        return this.fixtures[zipCode] ?? [];
+        return this.http
+            .get<CitiesResponse>(`${this.baseUrl}${zipCode}`)
+            .pipe(
+                map((response) =>
+                    response.places.map((place) => place['place name'])
+                )
+            );
     }
 }

@@ -1,7 +1,6 @@
 import { MyFormBuilder } from './my.form-builder';
 import { TestBed } from '@angular/core/testing';
 import { ShowcasesFormsModule } from '../../../showcases-forms.module';
-import { CitiesApiClient } from '../../api-clients/cities.api-client';
 import {
     HttpClientTestingModule,
     HttpTestingController,
@@ -21,7 +20,6 @@ describe('MyFormBuilder', () => {
 
         stateService = TestBed.inject(StateService);
         httpTestingControler = TestBed.inject(HttpTestingController);
-        TestBed.inject(CitiesApiClient).setFixtureMode(false);
         const builder = TestBed.inject(MyFormBuilder);
         form$ = builder.form;
     });
