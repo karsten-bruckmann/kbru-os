@@ -15,7 +15,6 @@ export const loadCityOptionsFormEffect =
             switchMap((value: AddressData) => getCities(value.zipCode)),
             map((cities) => {
                 if (cities.length > 0) {
-                    console.log(cities);
                     formGroup.get('city')?.setProp('options', cities);
                     formGroup.get('city')?.enable();
                 } else {

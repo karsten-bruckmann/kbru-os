@@ -50,8 +50,6 @@ export class MyFormBuilder {
         );
         form.setProp('visible', false);
 
-        console.log(form.get('address.zipCode')?.prop('visible'));
-
         return createEffectAwareForm(form, [
             () => addressForm.pipe(map(() => undefined)),
             toggleFormFormEffect,
