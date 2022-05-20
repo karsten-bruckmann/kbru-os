@@ -1,0 +1,45 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/effect-aware-reactive-forms/src",
+  "prefix": "kbru-os",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "outputs": [
+        "dist/libs/effect-aware-reactive-forms"
+      ],
+      "options": {
+        "project": "libs/effect-aware-reactive-forms/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/effect-aware-reactive-forms/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/effect-aware-reactive-forms/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "coverage/libs/effect-aware-reactive-forms"
+      ],
+      "options": {
+        "jestConfig": "libs/effect-aware-reactive-forms/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/effect-aware-reactive-forms/**/*.ts",
+          "libs/effect-aware-reactive-forms/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

@@ -1,0 +1,18 @@
+<form *ngIf="form$ | async as form" [formGroup]="form">
+    <ng-container *ngIf="form.prop('visible')">
+    <input formControlName="time" type="time"/>
+
+    <div *ngIf="form.get('address')?.prop('visible')" formGroupName="address">
+        <input formControlName="zipCode"/>
+        <input formControlName="street"/>
+        <input formControlName="city"/>
+    </div>
+    </ng-container>
+
+    <pre>Form Value: {{form.value | json}}</pre>
+
+    <pre>State: {{stateService.data$ | async | json}}</pre>
+</form>
+
+<button *ngIf="!stateService.data$.value.userData" (click)="login()">Login</button>
+<button *ngIf="stateService.data$.value.userData" (click)="logout()">Logout</button>
