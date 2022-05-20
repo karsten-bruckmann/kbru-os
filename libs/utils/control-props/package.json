@@ -1,0 +1,14 @@
+{
+    "name": "@kbru/control-props",
+    "author": "Karsten Bruckmann <karsten.bruckmann@gmail.com>",
+    "license": "MIT",
+    "description": "Define custom properties on form controls",
+    "version": "1.0.0",
+    "peerDependencies": {
+        "@angular/common": "^9.0.0",
+        "@angular/core": "^9.0.0"
+    },
+    "dependencies": {
+        "tslib": "^2.3.0"
+    }
+}
