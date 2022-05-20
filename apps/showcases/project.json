@@ -1,7 +1,7 @@
 {
     "projectType": "application",
     "sourceRoot": "apps/showcases/src",
-    "prefix": "kbru-os",
+    "prefix": "kbru",
     "targets": {
         "build": {
             "executor": "@angular-devkit/build-angular:browser",

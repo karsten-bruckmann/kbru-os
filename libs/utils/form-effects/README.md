@@ -7,7 +7,7 @@ A standard reactive form can be converted into an Observable, providing effects 
 # Installation
 
 ```bash
-npm install @kbru-os/utils-form-effects
+npm install @kbru/form-effects
 ```
 
 # Usage

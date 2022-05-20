@@ -21,7 +21,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "kbru-os",
+            "prefix": "kbru",
             "style": "kebab-case"
           }
         ]
