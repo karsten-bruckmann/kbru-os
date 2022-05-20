@@ -1,9 +1,13 @@
 {
   "name": "@kbru-os/effect-aware-reactive-forms",
+  "author": "Karsten Bruckmann <karsten.bruckmann@gmail.com>",
+  "license": "MIT",
+  "description": "Handle side effects on Angular's Reactive Forms",
   "version": "0.0.1",
   "peerDependencies": {
-    "@angular/common": "^13.3.0",
-    "@angular/core": "^13.3.0"
+    "@angular/common": "^9.0.0",
+    "@angular/core": "^9.0.0",
+    "@angular/forms": "^9.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
