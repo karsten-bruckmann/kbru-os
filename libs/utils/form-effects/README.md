@@ -1,4 +1,4 @@
-# utils-form-effects
+# @kbru/form-effects
 
 This library resulted from the wish to get the logic of complex forms out of the components. The goal is to have a Reactive Form, that can be tested without any components involved.
 

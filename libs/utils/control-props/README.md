@@ -1,4 +1,4 @@
-# control-props
+# @kbru/control-props
 
 Create `FormGroups` and `FormControls` with custom properties.
 
