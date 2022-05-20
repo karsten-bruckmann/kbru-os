@@ -1,6 +1,6 @@
 # @kbru/control-props
 
-Create `FormGroups` and `FormControls` with custom properties.
+Extend Angular's reactive `FormGroups` and `FormControls` with custom properties.
 
 Use Cases:
 - Mark a form field as visible/invisible instead of enabled/disabled without consequences for reactive forms

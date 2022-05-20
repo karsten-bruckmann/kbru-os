@@ -1,8 +1,8 @@
 # @kbru/form-effects
 
-This library resulted from the wish to get the logic of complex forms out of the components. The goal is to have a Reactive Form, that can be tested without any components involved.
+This library resulted from the wish to get the logic of complex Angular Reactive Forms out of the components. The goal is to have a Reactive Form, that can be tested without any components involved.
 
-A standard reactive form can be converted into an Observable, providing effects ()
+A standard reactive `FormGroup` can be converted into an Observable, that (if subscribed to) will trigger all side effects that were provided when creating the form.
 
 # Installation
 
@@ -14,7 +14,7 @@ npm install @kbru/form-effects
 
 ## Create Form Effects
 
-A `FormEffect` is just a function getting the `FormGroup` that returns an `Observable<void>`. The Effect can then interact with the form (or other data sources).
+A `FormEffect` is just a function getting the `FormGroup` and returning an `Observable<void>`. The Effect can then interact with the form (or other data sources).
 
 **Example**
 
@@ -45,13 +45,11 @@ const saveOnChangeEffectB =
         );
 ```
 
-_**Tipp**: Use `map` instead of `tap` inside the pipe to also make the `Observable` `void`._
-
-**Attention: Be sure not to create infinite Loops** with your Effects ;) If you create an effect based on the valueChanges of a form and set the values inside the effect, this is easily done!
+**Attention: Be sure not to create infinite Loops** with your Effects ;) If you create an effect based on the valueChanges of a form and set the values inside the effect, this is happens easily!
 
 ## Attach Effects to the `FormGroup`
 
-For the effects to run they need to be attached to the `FormGroup`. Use `createEffectAwareForm` (which will return a`BehaviourSubject<FormGroup>`).
+For the effects to run they need to be attached to the `FormGroup`. Use `createEffectAwareForm` (which will return a `BehaviourSubject<FormGroup>`).
 
 **Example**
 
@@ -76,4 +74,4 @@ For the effects to be run, the form returned by `createEffectAwareForm` needs to
 
 ## Integration Tests for a form
 
-See [Showcase](https://github.com/karsten-bruckmann/kbru-os/tree/main/libs/showcases/utils-form-effects/src/lib/core/form-builders/my-form/my.form-builder.spec.ts) for an example
+See [Showcase](https://github.com/karsten-bruckmann/kbru-os/blob/main/libs/showcases/forms/src/lib/core/form-builders/delivery/delivery.form-builder.spec.ts) for an example
