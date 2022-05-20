@@ -16,9 +16,9 @@ import { EffectsModule } from '@ngrx/effects';
             {
                 path: 'effect-aware-reactive-forms',
                 loadChildren: () =>
-                    import(
-                        '@kbru-os/showcases/effect-aware-reactive-forms'
-                    ).then((m) => m.ShowcasesEffectAwareReactiveFormsModule),
+                    import('@kbru-os/showcases-form-effects').then(
+                        (m) => m.ShowcasesFormsModule
+                    ),
             },
         ]),
         StoreModule.forRoot({}),

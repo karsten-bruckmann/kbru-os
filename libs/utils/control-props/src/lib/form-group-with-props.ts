@@ -1,27 +1,26 @@
 import {
+    AbstractControlOptions,
     AsyncValidatorFn,
-    FormControl,
-    FormControlOptions,
+    FormGroup,
     ValidatorFn,
 } from '@angular/forms';
-import { PropsAware } from '../types/props-aware.type';
+import { FormControlWithProps } from './form-control-with-props';
+import { PropsAware } from './props-aware.type';
 
-export class FormControlWithProps<T>
-    extends FormControl
-    implements PropsAware<T>
-{
+export class FormGroupWithProps<T> extends FormGroup implements PropsAware<T> {
     constructor(
-        public readonly props: T,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        formState?: any,
+        private props: T,
+        controls: {
+            [p: string]: FormGroupWithProps<T> | FormControlWithProps<T>;
+        },
         validatorOrOpts?:
             | ValidatorFn
             | ValidatorFn[]
-            | FormControlOptions
+            | AbstractControlOptions
             | null,
         asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null
     ) {
-        super(formState, validatorOrOpts, asyncValidator);
+        super(controls, validatorOrOpts, asyncValidator);
     }
 
     public prop<K extends keyof T>(key: K): T[K] {

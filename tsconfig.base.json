@@ -15,12 +15,9 @@
         "skipDefaultLibCheck": true,
         "baseUrl": ".",
         "paths": {
-            "@kbru-os/effect-aware-reactive-forms": [
-                "libs/effect-aware-reactive-forms/src/index.ts"
-            ],
-            "@kbru-os/showcases/effect-aware-reactive-forms": [
-                "libs/showcases/effect-aware-reactive-forms/src/index.ts"
-            ]
+            "@kbru/control-props": ["libs/utils/control-props/src/index.ts"],
+            "@kbru/form-effects": ["libs/utils/form-effects/src/index.ts"],
+            "@kbru/showcases-forms": ["libs/showcases/forms/src/index.ts"]
         }
     },
     "exclude": ["node_modules", "tmp"]
