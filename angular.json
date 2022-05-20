@@ -2,7 +2,9 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
+    "effect-aware-reactive-forms": "libs/effect-aware-reactive-forms",
     "showcases": "apps/showcases",
-    "showcases-e2e": "apps/showcases-e2e"
+    "showcases-e2e": "apps/showcases-e2e",
+    "showcases-effect-aware-reactive-forms": "libs/showcases/effect-aware-reactive-forms"
   }
 }

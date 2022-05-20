@@ -1,0 +1,30 @@
+:host {
+  display: block;
+  padding: 30px;
+}
+
+header {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 30px;
+
+  background: #edf3ff;
+  border-bottom: 1px dashed grey;
+
+  a {
+    display: block;
+    align-self: center;
+
+    padding: 10px;
+
+    font-family: Verdana, sans-serif;
+    text-decoration: none;
+    color: black;
+
+    &:hover {
+      background: white;
+    }
+  }
+}
