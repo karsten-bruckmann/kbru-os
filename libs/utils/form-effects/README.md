@@ -77,30 +77,3 @@ For the effects to be run, the form returned by `createEffectAwareForm` needs to
 ## Integration Tests for a form
 
 See [Showcase](https://github.com/karsten-bruckmann/kbru-os/tree/main/libs/showcases/utils-form-effects/src/lib/core/form-builders/my-form/my.form-builder.spec.ts) for an example
-
-## Using custom properties
-
-Sometimes it's quite useful to have custom properties on a control. Example use cases:
-
--   Flag a control a hidden for the component to know that it should not be shown
--   Provide possible options for a select
--   ...
-
-You can use `FormControlWithProps` or `FormGroupWithProps` for that. Either in addition to effects, or without them.
-
-**Example:**
-
-```typescript
-const form = new FormGroupWithProps<{ visible: boolean }>(
-    { visible: true },
-    {
-        foo: new FormControlWithProps({ visible: true }, ''),
-    }
-);
-```
-
-```html
-<form [formControl]="form" *ngIf="form.prop('visible')">
-    <input formControlName="foo" *ngIf="form.get('foo')?.prop('visible')" />
-</form>
-```
