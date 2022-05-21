@@ -11,7 +11,7 @@ export class FormControlWithProps<T>
     implements PropsAware<T>
 {
     constructor(
-        public readonly props: T,
+        private readonly props: T,
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         formState?: any,
         validatorOrOpts?:
