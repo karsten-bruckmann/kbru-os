@@ -11,7 +11,6 @@ import {
     userLoggedOut,
 } from '../../state/user-data/user-data.actions';
 import { EffectsModule } from '@ngrx/effects';
-import { firstValueFrom, timer } from 'rxjs';
 import { citiesMock } from '../../api-clients/cities.response';
 
 describe('MyFormBuilder', () => {
@@ -36,18 +35,13 @@ describe('MyFormBuilder', () => {
         form$ = builder.form;
     });
 
-    it('returns a behaviour subject of the form', () => {
-        expect(form$.subscribe).toBeTruthy();
-        expect(form$.value).toBeTruthy();
-    });
-
-    it('enables the address group on logout', () => {
+    it('shows the address group on logout', () => {
         form$.subscribe();
         store$.dispatch(userLoggedOut());
-        expect(form$.value.get('address')?.enabled).toEqual(true);
+        expect(form$.value.get('address')?.prop('visible')).toEqual(true);
     });
 
-    it('disables the address group on login', async () => {
+    it('hides the address group on login', async () => {
         form$.subscribe();
         store$.dispatch(
             userLoggedIn({
@@ -58,7 +52,7 @@ describe('MyFormBuilder', () => {
                 },
             })
         );
-        expect(form$.value.get('address')?.disabled).toEqual(true);
+        expect(form$.value.get('address')?.prop('visible')).toEqual(false);
     });
 
     it('loads available cities from the api', async () => {
@@ -67,12 +61,35 @@ describe('MyFormBuilder', () => {
         httpTestingControler
             .expectOne('https://api.zippopotam.us/de/12435')
             .flush(citiesMock('12435', ['Berlin', 'Foo']));
-        await firstValueFrom(timer(100));
         console.log(form$.value.get('address.city')?.props);
         expect(form$.value.get('address.city')?.prop('options')).toEqual([
             'Berlin',
             'Foo',
         ]);
+        httpTestingControler.verify();
+    });
+
+    it('disables cities/street when no cities are available', async () => {
+        form$.subscribe();
+        form$.value.get('address.zipCode')?.setValue('12435');
+        httpTestingControler
+            .expectOne('https://api.zippopotam.us/de/12435')
+            .flush(citiesMock('12435', []));
+        console.log(form$.value.get('address.city')?.props);
+        expect(form$.value.get('address.city')?.enabled).toEqual(false);
+        expect(form$.value.get('address.street')?.enabled).toEqual(false);
+        httpTestingControler.verify();
+    });
+
+    it('enables cities/street when cities are available', async () => {
+        form$.subscribe();
+        form$.value.get('address.zipCode')?.setValue('12435');
+        httpTestingControler
+            .expectOne('https://api.zippopotam.us/de/12435')
+            .flush(citiesMock('12435', ['B', 'E', 'R', 'L', 'I', 'N']));
+        console.log(form$.value.get('address.city')?.props);
+        expect(form$.value.get('address.city')?.enabled).toEqual(true);
+        expect(form$.value.get('address.street')?.enabled).toEqual(true);
         httpTestingControler.verify();
     });
 });

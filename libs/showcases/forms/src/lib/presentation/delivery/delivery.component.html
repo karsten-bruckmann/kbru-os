@@ -1,11 +1,19 @@
 <div class="form-row">
-    <label>Already registered?</label>
-    <button *ngIf="(user$ | async) === null" (click)="login()">
-        Login
-    </button>
-    <button *ngIf="user$ | async" (click)="logout()">
-        Logout
-    </button>
+    <ng-container #loginButton *ngIf="(user$ | async) === null; else logoutButton">
+        <label>Already registered?</label>
+        <button (click)="login()">
+            Login
+        </button>
+    </ng-container>
+    <ng-template #logoutButton>
+        <label *ngIf="user$ | async as user">
+            {{ user.zipCode }} {{ user.city }}<br />
+            {{ user.street }}
+        </label>
+        <button (click)="logout()">
+            Logout
+        </button>
+    </ng-template>
 </div>
 
 <form *ngIf="form$ | async as form" [formGroup]="form">
@@ -27,17 +35,21 @@
                     <ng-container
                             *ngIf="form.get('address.city')?.prop('options') as options"
                     >
-                        <option *ngIf="!form.get('address.city')?.value && !!form.get('address.city')?.enabled" value="">
+                        <option *ngIf="!form.get('address.city')?.value && !!form.get('address.city')?.enabled"
+                                value="">
                             Please select...
                         </option>
-                        <option *ngIf="!form.get('address.city')?.value && !!form.get('address.city')?.disabled" value="">
+                        <option *ngIf="!form.get('address.city')?.value && !!form.get('address.city')?.disabled"
+                                value="">
                             Please enter a valid zip code first
                         </option>
-                        <option *ngFor="let option of options" [selected]="form.get('address.city')?.value === option">{{ option }}</option>
+                        <option *ngFor="let option of options"
+                                [selected]="form.get('address.city')?.value === option">{{ option }}</option>
                     </ng-container>
                 </select>
                 <ng-template #cityValue>
-                    {{ form.get('address.city')?.value }}
+                    <span class="value"
+                          [class.disabled]="form.get('address.city')?.disabled">{{ form.get('address.city')?.value }}</span>
                 </ng-template>
             </div>
 
@@ -48,3 +60,5 @@
         </div>
     </ng-container>
 </form>
+
+<pre>{{ (form$ | async)?.value | json }}</pre>

@@ -23,4 +23,12 @@ h3 {
     align-self: center;
     width: 65%
   }
+  .value {
+    width: 65%;
+    text-align: left;
+
+    &.disabled {
+      color: grey;
+    }
+  }
 }

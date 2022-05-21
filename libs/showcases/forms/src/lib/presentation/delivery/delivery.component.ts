@@ -25,9 +25,9 @@ export class DeliveryComponent {
         this.store$.dispatch(
             userLoggedIn({
                 userData: {
-                    zipCode: '12345',
-                    city: 'Hamburg',
-                    street: 'An der Alster',
+                    zipCode: '12435',
+                    city: 'Berlin',
+                    street: 'An der Spree 64',
                 },
             })
         );
