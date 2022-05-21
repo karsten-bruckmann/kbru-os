@@ -12,3 +12,16 @@ export interface CitiesResponse {
         }
     ];
 }
+
+export const citiesMock = (zipCode: string, cities: string[]) => ({
+    'post code': zipCode,
+    country: 'Germany',
+    'country abbreviation': 'DE',
+    places: cities.map((city) => ({
+        'place name': city,
+        longitude: '',
+        state: '',
+        'state abbreviation': '',
+        latitude: '',
+    })),
+});

@@ -5,21 +5,33 @@ import {
     HttpClientTestingModule,
     HttpTestingController,
 } from '@angular/common/http/testing';
-import { StateService } from '../../state/state.service';
+import { Store, StoreModule } from '@ngrx/store';
+import {
+    userLoggedIn,
+    userLoggedOut,
+} from '../../state/user-data/user-data.actions';
+import { EffectsModule } from '@ngrx/effects';
+import { firstValueFrom, timer } from 'rxjs';
+import { citiesMock } from '../../api-clients/cities.response';
 
 describe('MyFormBuilder', () => {
-    let stateService: StateService;
     let httpTestingControler: HttpTestingController;
+    let store$: Store;
 
     let form$: DeliveryFormBuilder['form'];
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [ShowcasesFormsModule, HttpClientTestingModule],
+            imports: [
+                StoreModule.forRoot({}),
+                EffectsModule.forRoot([]),
+                ShowcasesFormsModule,
+                HttpClientTestingModule,
+            ],
         });
 
-        stateService = TestBed.inject(StateService);
         httpTestingControler = TestBed.inject(HttpTestingController);
+        store$ = TestBed.inject(Store);
         const builder = TestBed.inject(DeliveryFormBuilder);
         form$ = builder.form;
     });
@@ -29,32 +41,37 @@ describe('MyFormBuilder', () => {
         expect(form$.value).toBeTruthy();
     });
 
-    it('shows the address group on logout', () => {
+    it('enables the address group on logout', () => {
         form$.subscribe();
-        stateService.data$.next({
-            userData: null,
-        });
-        expect(form$.value.get('address')?.prop('visible')).toEqual(true);
+        store$.dispatch(userLoggedOut());
+        expect(form$.value.get('address')?.enabled).toEqual(true);
     });
 
-    it('hides the address group on login', async () => {
+    it('disables the address group on login', async () => {
         form$.subscribe();
-        stateService.data$.next({
-            userData: {
-                zipCode: '12345',
-                city: 'sewfefwef',
-                street: 'Abcdef',
-            },
-        });
-        expect(form$.value.get('address')?.prop('visible')).toEqual(false);
+        store$.dispatch(
+            userLoggedIn({
+                userData: {
+                    zipCode: '12345',
+                    city: 'sewfefwef',
+                    street: 'Abcdef',
+                },
+            })
+        );
+        expect(form$.value.get('address')?.disabled).toEqual(true);
     });
 
     it('loads available cities from the api', async () => {
         form$.subscribe();
         form$.value.get('address.zipCode')?.setValue('12435');
-        httpTestingControler.expectOne('/some/api/path').flush(['Berlin']);
+        httpTestingControler
+            .expectOne('https://api.zippopotam.us/de/12435')
+            .flush(citiesMock('12435', ['Berlin', 'Foo']));
+        await firstValueFrom(timer(100));
+        console.log(form$.value.get('address.city')?.props);
         expect(form$.value.get('address.city')?.prop('options')).toEqual([
             'Berlin',
+            'Foo',
         ]);
         httpTestingControler.verify();
     });

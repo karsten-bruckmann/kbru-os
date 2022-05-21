@@ -14,6 +14,7 @@ import { cityOptionsFormEffect } from './effects/city-options.form-effect';
 import { streetEnabledStateFormEffect } from './effects/street-enabled-state.form-effect';
 import { citySetValueFormEffect } from './effects/city-set-value.form-effect';
 import { addressSetValueFormEffect } from './effects/address-set-value.form-effect';
+import { cityVisibilityFormEffect } from './effects/city-visibility.form-effect';
 
 export interface Props {
     visible: boolean;
@@ -48,7 +49,9 @@ export class DeliveryFormBuilder {
                 citySetValueFormEffect((zipCode) =>
                     this.store$.select(citiesSelector(zipCode))
                 ),
-                streetEnabledStateFormEffect,
+                cityVisibilityFormEffect((zipCode) =>
+                    this.store$.select(citiesSelector(zipCode))
+                ),
             ]
         );
         const form = new FormGroupWithProps<Props>(
@@ -63,6 +66,7 @@ export class DeliveryFormBuilder {
             () => addressForm.pipe(map(() => undefined)),
             addressEnabledStateFormEffect(this.store$.select(userDataSelector)),
             addressSetValueFormEffect(this.store$.select(userDataSelector)),
+            streetEnabledStateFormEffect,
         ]);
     }
 }

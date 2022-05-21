@@ -23,7 +23,7 @@
 
             <div class="form-row">
                 <label>City</label>
-                <select formControlName="city">
+                <select formControlName="city" *ngIf="form.get('address.city')?.prop('visible'); else cityValue">
                     <ng-container
                             *ngIf="form.get('address.city')?.prop('options') as options"
                     >
@@ -36,6 +36,9 @@
                         <option *ngFor="let option of options" [selected]="form.get('address.city')?.value === option">{{ option }}</option>
                     </ng-container>
                 </select>
+                <ng-template #cityValue>
+                    {{ form.get('address.city')?.value }}
+                </ng-template>
             </div>
 
             <div class="form-row">

@@ -2,12 +2,11 @@ import { map, Observable, switchMap } from 'rxjs';
 import { FormGroup } from '../../../types/form-group.type';
 import { distinctValue, FormEffect } from '@kbru/form-effects';
 import {
-    citiesLoaded,
     CitiesLoading,
     CitiesNotLoaded,
 } from '../../../state/cities/cities.model';
 
-export const cityEnabledStateFormEffect =
+export const cityVisibilityFormEffect =
     (
         selectCities: (
             zipCode: string
@@ -21,10 +20,10 @@ export const cityEnabledStateFormEffect =
         return distinctValue(zipControl).pipe(
             switchMap((zipCode) => selectCities(zipCode)),
             map((cities) => {
-                if (!citiesLoaded(cities)) {
-                    formGroup.get('city')?.disable();
+                if (cities.length === 1) {
+                    formGroup.get('city')?.setProp('visible', false);
                 } else {
-                    formGroup.get('city')?.enable();
+                    formGroup.get('city')?.setProp('visible', true);
                 }
             })
         );
