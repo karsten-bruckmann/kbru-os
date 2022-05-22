@@ -49,7 +49,7 @@ const saveOnChangeEffectB =
 
 ## Attach Effects to the `FormGroup`
 
-For the effects to run they need to be attached to the `FormGroup`. Use `createEffectAwareForm` (which will return a `BehaviourSubject<FormGroup>`).
+For the effects to run they need to be attached to the `FormGroup`. Use `createEffectAwareForm` (which will return an `Observable<FormGroup>`).
 
 **Example**
 

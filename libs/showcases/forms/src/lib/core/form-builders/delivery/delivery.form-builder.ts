@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { FormGroup } from '../../types/form-group.type';
 import { createEffectAwareForm } from '@kbru/form-effects';
 import { FormControlWithProps, FormGroupWithProps } from '@kbru/control-props';
@@ -18,7 +18,7 @@ export interface Props {
 export class DeliveryFormBuilder {
     constructor(private store$: Store) {}
 
-    public get form(): BehaviorSubject<FormGroup> {
+    public get form(): Observable<FormGroup> {
         const form = new FormGroupWithProps<Props>(
             { visible: true },
             {
