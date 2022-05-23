@@ -49,6 +49,7 @@ describe('MyFormBuilder', () => {
         store$.dispatch(
             userLoggedIn({
                 userData: {
+                    fullName: 'Max Mustermann',
                     zipCode: '12345',
                     city: 'sewfefwef',
                     street: 'Abcdef',
