@@ -14,12 +14,12 @@ h3 {
 
   background: aliceblue;
 
-  label {
+  &>label {
     align-self: center;
     width: 30%;
   }
 
-  input, select {
+  input:not([type=radio]), select, .controls {
     align-self: center;
     width: 65%
   }

@@ -1,9 +1,11 @@
 export interface AddressData {
+    fullName: string;
     zipCode: string;
     city: string;
     street: string;
 }
 
-export interface DeliveryData {
+export interface ShipmentData {
     address: AddressData;
+    method: 'Standard' | 'Express';
 }

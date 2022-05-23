@@ -1,4 +1,4 @@
-import { DeliveryFormBuilder } from './delivery.form-builder';
+import { ShipmentFormBuilder } from './shipment.form-builder';
 import { TestBed } from '@angular/core/testing';
 import { ShowcasesFormsModule } from '../../../showcases-forms.module';
 import {
@@ -18,7 +18,7 @@ describe('MyFormBuilder', () => {
     let httpTestingControler: HttpTestingController;
     let store$: Store;
 
-    let form$: DeliveryFormBuilder['form'];
+    let form$: ShipmentFormBuilder['form'];
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -32,7 +32,7 @@ describe('MyFormBuilder', () => {
 
         httpTestingControler = TestBed.inject(HttpTestingController);
         store$ = TestBed.inject(Store);
-        const builder = TestBed.inject(DeliveryFormBuilder);
+        const builder = TestBed.inject(ShipmentFormBuilder);
         form$ = builder.form;
     });
 

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DeliveryComponent } from './presentation/delivery/delivery.component';
+import { ShipmentComponent } from './presentation/shipment/shipment.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { DeliveryDataModule } from './core/state/delivery-data/delivery-data.module';
+import { ShipmentDataModule } from './core/state/shipment-data/shipment-data.module';
 import { UserDataModule } from './core/state/user-data/user-data.module';
 import { CitiesModule } from './core/state/cities/cities.module';
 
@@ -14,13 +14,13 @@ import { CitiesModule } from './core/state/cities/cities.module';
         RouterModule.forChild([
             {
                 path: '',
-                component: DeliveryComponent,
+                component: ShipmentComponent,
             },
         ]),
-        DeliveryDataModule,
+        ShipmentDataModule,
         UserDataModule,
         CitiesModule,
     ],
-    declarations: [DeliveryComponent],
+    declarations: [ShipmentComponent],
 })
 export class ShowcasesFormsModule {}

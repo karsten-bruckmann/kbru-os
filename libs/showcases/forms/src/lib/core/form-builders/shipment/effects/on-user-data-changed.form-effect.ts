@@ -10,13 +10,20 @@ export const onUserDataChangedFormEffect =
         if (!addressGroup) {
             throw new Error('address not in form');
         }
+        const methodGroup = formGroup.get('method');
+        if (!methodGroup) {
+            throw new Error('method not in form');
+        }
         return userData$.pipe(
             map((userData) => {
                 if (null === userData) {
                     addressGroup.setProp('visible', true);
+                    methodGroup.setProp('options', ['Standard']);
+                    methodGroup.setValue('Standard');
                 } else {
                     addressGroup.setProp('visible', false);
                     addressGroup.setValue(userData);
+                    methodGroup.setProp('options', ['Standard', 'Express']);
                 }
             })
         );

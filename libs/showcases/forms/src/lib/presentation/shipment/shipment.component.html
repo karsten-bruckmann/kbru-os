@@ -7,7 +7,8 @@
     </ng-container>
     <ng-template #logoutButton>
         <label *ngIf="user$ | async as user">
-            {{ user.zipCode }} {{ user.city }}<br />
+            {{ user.fullName }}<br/>
+            {{ user.zipCode }} {{ user.city }}<br/>
             {{ user.street }}
         </label>
         <button (click)="logout()">
@@ -16,13 +17,18 @@
     </ng-template>
 </div>
 
-<form *ngIf="form$ | async as form" [formGroup]="form">
-    <ng-container *ngIf="form.prop('visible')">
-        <div
+<ng-container *ngIf="form$ | async as form" [formGroup]="form">
+    <form *ngIf="form.prop('visible')">
+        <ng-container
                 *ngIf="form.get('address')?.prop('visible')"
                 formGroupName="address"
         >
-            <h3>Address</h3>
+            <h3>Shipping Address</h3>
+
+            <div class="form-row">
+                <label>Full Name</label>
+                <input formControlName="fullName"/>
+            </div>
 
             <div class="form-row">
                 <label>Zip Code</label>
@@ -57,8 +63,22 @@
                 <label>Street / No.</label>
                 <input formControlName="street"/>
             </div>
+        </ng-container>
+
+        <h3></h3>
+
+        <div class="form-row">
+            <label>Method</label>
+            <div class="controls">
+                <label *ngFor="let option of form.get('method')?.prop('options') ?? []">
+                    <input [value]="option" type="radio" formControlName="method"/>
+                    {{ option }}
+                </label>
+            </div>
         </div>
-    </ng-container>
-</form>
+
+    </form>
+    <button (click)="submit()">OK</button>
+</ng-container>
 
 <pre>{{ (form$ | async)?.value | json }}</pre>
