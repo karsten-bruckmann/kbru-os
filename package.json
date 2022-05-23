@@ -1,5 +1,6 @@
 {
   "name": "kbru",
+  "description": "Monorepo for a collection of small Angular-related utility libraries.",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -9,7 +10,7 @@
     "build": "nx build",
     "test": "nx test"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/animations": "~13.3.0",
     "@angular/common": "~13.3.0",
