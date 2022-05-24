@@ -3,11 +3,11 @@
     "author": "Karsten Bruckmann <karsten.bruckmann@gmail.com>",
     "license": "MIT",
     "description": "Handle side effects on Angular's Reactive Forms",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "homepage": "https://github.com/karsten-bruckmann/kbru-os/tree/main/libs/utils/form-effects#readme",
     "repository": "https://github.com/karsten-bruckmann/kbru-os/tree/main/libs/utils/form-effects",
     "bugs": {
-        "url": ""
+        "url": "https://github.com/karsten-bruckmann/kbru-os/labels/form-effects"
     },
     "peerDependencies": {
         "@angular/forms": "^9.0.0 | ^10.0.0 | ^11.0.0 | ^12.0.0",
