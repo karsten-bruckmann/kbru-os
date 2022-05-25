@@ -11,9 +11,9 @@ jobs:
       matrix:
         job:
           - format:check
-          - affected:lint --base=origin/main
-          - affected:test --base=origin/main
-          - affected:build --base=origin/main
+          - affected:lint
+          - affected:test
+          - affected:build
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -21,7 +21,7 @@ jobs:
           node-version: 16
           registry-url: https://registry.npmjs.org/
       - run: npm ci
-      - run: npx nx ${{ matrix.job }}
+      - run: npx nx ${{ matrix.job }} --base=origin/main
   publish:
     needs: test
     runs-on: ubuntu-latest
