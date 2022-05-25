@@ -39,19 +39,6 @@ jobs:
             - run: npx nx affected --base=current --target=publish
               env:
                   NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-    remove_label:
-        needs: publish
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-            - uses: actions-ecosystem/action-remove-labels@v1
+            - uses: actions-ecosystem/action-push-tag@v1
               with:
-                  labels: current
-    add_label:
-        needs: remove_label
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-            - uses: actions-ecosystem/action-add-labels@v1
-              with:
-                  labels: current
+                  tag: current
