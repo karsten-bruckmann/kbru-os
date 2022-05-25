@@ -19,13 +19,15 @@ A `FormEffect` is just a function getting the `FormGroup` and returning an `Obse
 **Example**
 
 ```typescript
+let state$ = new BehaviourSubject<any>(null);
+
+// An effect that runs only once
 const setInitialValueEffect: FormEffect<FormGroup> = (form) => {
     form.setValue(state$.value);
     return EMPTY;
 };
 
-let state$ = new BehaviourSubject<any>(null);
-
+// An effect that interacts with "external" data
 const saveOnChangeEffectA: FormEffect<FormGroup> = (form) =>
     form.valueChanges.pipe(
         map((value) => {
@@ -33,8 +35,8 @@ const saveOnChangeEffectA: FormEffect<FormGroup> = (form) =>
         })
     );
 
-// or
-
+// Alternative for the above effect. Here, the external data source can
+// be mocked for testing.
 const saveOnChangeEffectB =
     (state$: BehaviourSubject<any>): FormEffect<FormGroup> =>
     (form) =>
@@ -55,7 +57,8 @@ For the effects to run they need to be attached to the `FormGroup`. Use `createE
 
 ```typescript
 const form = new FormGroup({
-    /* ... */
+    foo: new FormControl(null),
+    // ...
 });
 const form$ = createEffectAwareForm(form, [effects]);
 ```
