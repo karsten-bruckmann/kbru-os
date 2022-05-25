@@ -5,25 +5,24 @@ on:
       - 'github-actions'
 
 jobs:
-  main:
-    name: CI
-    uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.4
-    with:
-      parallel-commands: |
-        npx nx-cloud record -- npx nx workspace-lint
-        npx nx-cloud record -- npx nx format:check
-      parallel-commands-on-agents: |
-        npx nx affected --target=lint --parallel=3
-        npx nx affected --target=test --parallel=3 --ci --code-coverage
-        npx nx affected --target=build --parallel=3
-  agents:
-    name: Nx Cloud - Agents
-    uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.4
-    with:
-      number-of-agents: 3
-
-  publish-npm:
-    needs: main
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        job:
+          - format:check
+          - affected:lint
+          - affected:test
+          - affected:build
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          registry-url: https://registry.npmjs.org/
+      - run: npm ci
+      - run: npx nx ${{ matrix.job }}
+  publish:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
