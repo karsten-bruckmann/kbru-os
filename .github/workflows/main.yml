@@ -40,6 +40,7 @@ jobs:
               env:
                   NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
     remove_label:
+        needs: publish
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
@@ -47,6 +48,7 @@ jobs:
               with:
                   labels: current
     add_label:
+        needs: remove_label
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
