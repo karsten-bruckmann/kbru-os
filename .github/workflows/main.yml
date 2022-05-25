@@ -11,9 +11,9 @@ jobs:
       matrix:
         job:
           - format:check
-          - affected:lint
-          - affected:test
-          - affected:build
+          - affected:lint --base=origin/main
+          - affected:test --base=origin/main
+          - affected:build --base=origin/main
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
