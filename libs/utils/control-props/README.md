@@ -3,7 +3,7 @@
 Extend Angular's reactive `FormGroups` and `FormControls` with custom properties.
 
 Use Cases:
-- Mark a form field as visible/invisible instead of enabled/disabled without consequences for reactive forms
+- Mark a form field as visible/invisible instead of enabled/disabled without affecting the behaviour of the form.
 - Attach valid values to a control for the template to display them. Useful for `select`, `radio`, ...
 
 ## Installation
