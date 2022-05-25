@@ -13,4 +13,6 @@ jobs:
                   fetch-depth: 0
             - uses: actions-ecosystem/action-push-tag@v1
               with:
-                  tag: test
+                  tag: test2
+
+
