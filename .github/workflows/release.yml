@@ -5,24 +5,25 @@ on:
       - 'github-actions'
 
 jobs:
-  main:
-    name: CI
-    uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.4
-    with:
-      parallel-commands: |
-        npx nx-cloud record -- npx nx workspace-lint
-        npx nx-cloud record -- npx nx format:check
-      parallel-commands-on-agents: |
-        npx nx affected --target=lint --parallel=3
-        npx nx affected --target=test --parallel=3 --ci --code-coverage
-        npx nx affected --target=build --parallel=3
-  agents:
-    name: Nx Cloud - Agents
-    uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.4
-    with:
-      number-of-agents: 3
+#  main:
+#    name: CI
+#    uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.4
+#    with:
+#      parallel-commands: |
+#        npx nx-cloud record -- npx nx workspace-lint
+#        npx nx-cloud record -- npx nx format:check
+#      parallel-commands-on-agents: |
+#        npx nx affected --target=lint --parallel=3
+#        npx nx affected --target=test --parallel=3 --ci --code-coverage
+#        npx nx affected --target=build --parallel=3
+#  agents:
+#    name: Nx Cloud - Agents
+#    uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.4
+#    with:
+#      number-of-agents: 3
 
   build:
+#    needs: main
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -42,6 +43,6 @@ jobs:
           node-version: 16
           registry-url: https://registry.npmjs.org/
       - run: npm ci
-      - run: npx nx affected:publish
+      - run: npx nx affected --target=publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
