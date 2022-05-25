@@ -4,7 +4,7 @@
     "projects": {
         "control-props": "libs/utils/control-props",
         "form-effects": "libs/utils/form-effects",
-        "showcases": "apps/showcases",
+        "showcases-form": "apps/showcases/form",
         "showcases-forms": "libs/showcases/forms"
     }
 }
