@@ -23,7 +23,7 @@ jobs:
       number-of-agents: 3
 
   publish-npm:
-#    needs: main
+    needs: main
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
