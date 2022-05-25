@@ -15,6 +15,12 @@ jobs:
                     - affected:test
                     - affected:build
         steps:
+            - uses: nrwl/last-successful-commit-action@v1
+              id: last_successful_commit
+              with:
+                  branch: 'main'
+                  workflow_id: 'main.yml'
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
             - uses: actions/checkout@v3
               with:
                   fetch-depth: 0
@@ -23,11 +29,17 @@ jobs:
                   node-version: 16
                   registry-url: https://registry.npmjs.org/
             - run: npm ci
-            - run: npx nx ${{ matrix.job }} --base=origin/main
+            - run: npx nx ${{ matrix.job }} --base=${{ steps.last_successful_commit.outputs.commit_hash }}
     publish:
         needs: test
         runs-on: ubuntu-latest
         steps:
+            - uses: nrwl/last-successful-commit-action@v1
+              id: last_successful_commit
+              with:
+                  branch: 'main'
+                  workflow_id: 'main.yml'
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
             - uses: actions/checkout@v3
               with:
                   fetch-depth: 0
@@ -36,9 +48,6 @@ jobs:
                   node-version: 16
                   registry-url: https://registry.npmjs.org/
             - run: npm ci
-            - run: npx nx affected --base=current --target=publish
+            - run: npx nx affected --target=publish --base=${{ steps.last_successful_commit.outputs.commit_hash }}
               env:
                   NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-            - uses: actions-ecosystem/action-push-tag@v1
-              with:
-                  tag: current
