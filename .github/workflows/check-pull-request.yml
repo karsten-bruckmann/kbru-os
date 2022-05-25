@@ -1,4 +1,4 @@
-name: Test
+name: Check Pull Request
 on:
     pull_request:
         branches:
