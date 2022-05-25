@@ -36,6 +36,16 @@
                     "libs/utils/form-effects/**/*.html"
                 ]
             }
+        },
+        "publish": {
+            "executor": "nx:run-commands",
+            "options": {
+                "commands": [
+                    {
+                        "command": "npm publish dist/libs/utils/form-effects --public"
+                    }
+                ]
+            }
         }
     },
     "tags": []

@@ -1,6 +1,6 @@
-name: Test
+name: Release
 on:
-    pull_request:
+    push:
         branches:
             - main
 
@@ -24,3 +24,18 @@ jobs:
                   registry-url: https://registry.npmjs.org/
             - run: npm ci
             - run: npx nx ${{ matrix.job }} --base=origin/main
+    publish:
+        needs: test
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+              with:
+                  fetch-depth: 0
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 16
+                  registry-url: https://registry.npmjs.org/
+            - run: npm ci
+            - run: npx nx affected --base=origin/main --target=publish
+              env:
+                  NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
