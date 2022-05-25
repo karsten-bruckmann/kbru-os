@@ -6,12 +6,12 @@ Monorepo for a collection of small Angular-related utility libraries.
 
 ### Libraries
 
-- [@kbru/form-effects](./libs/utils/form-effects)
-- [@kbru/control-props](./libs/utils/control-props)
+-   [@kbru/form-effects](./libs/utils/form-effects)
+-   [@kbru/control-props](./libs/utils/control-props)
 
 ### Showcases
 
-- [Forms](./libs/showcases/forms) \
-  Contains example usage of
-  - [@kbru/form-effects](./libs/utils/form-effects)
-  - [@kbru/control-props](./libs/utils/control-props)
+-   [Forms](./libs/showcases/forms) \
+    Contains example usage of
+    -   [@kbru/form-effects](./libs/utils/form-effects)
+    -   [@kbru/control-props](./libs/utils/control-props)
