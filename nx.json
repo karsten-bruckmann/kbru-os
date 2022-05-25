@@ -30,6 +30,12 @@
                 "target": "build",
                 "projects": "dependencies"
             }
+        ],
+        "publish": [
+            {
+                "target": "build",
+                "projects": "self"
+            }
         ]
     },
     "generators": {
