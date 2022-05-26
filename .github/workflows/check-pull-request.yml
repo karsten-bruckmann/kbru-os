@@ -10,11 +10,11 @@ jobs:
         strategy:
             matrix:
                 job:
-                    - affected:version-check
                     - format:check
-                    - affected:lint
-                    - affected:test
-                    - affected:build
+                    - affected --target=version-check
+                    - affected --target=lint
+                    - affected --target=test
+                    - affected --target=build
         steps:
             - uses: actions/checkout@v3
               with:
