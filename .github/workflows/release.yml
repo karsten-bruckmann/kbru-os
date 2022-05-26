@@ -10,11 +10,11 @@ jobs:
         strategy:
             matrix:
                 job:
-                    - affected:version-check
                     - format:check
-                    - affected:lint
-                    - affected:test
-                    - affected:build
+                    - affected --target=version-check
+                    - affected --target=lint
+                    - affected --target=test
+                    - affected --target=build
         steps:
             - uses: nrwl/last-successful-commit-action@v1
               id: last_successful_commit
