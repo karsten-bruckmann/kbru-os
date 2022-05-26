@@ -45,6 +45,15 @@
                     }
                 ]
             }
+        },
+        "version-check": {
+            "executor": "./tools/executors/version:compare",
+            "options": {
+                "packageName": "@kbru/control-props"
+            }
+        },
+        "changelog-check": {
+            "executor": "./tools/executors/version:documented"
         }
     },
     "tags": []

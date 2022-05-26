@@ -1,8 +1,8 @@
-name: Check Pull Request
+name: Check Release Pull Request
 on:
     pull_request:
         branches:
-            - main
+            - release
 
 jobs:
     test:
@@ -11,6 +11,8 @@ jobs:
             matrix:
                 job:
                     - format:check
+                    - affected --target=version-check
+                    - affected --target=changelog-check
                     - affected --target=lint
                     - affected --target=test
                     - affected --target=build
