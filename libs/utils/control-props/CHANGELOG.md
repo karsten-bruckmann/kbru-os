@@ -9,11 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
--   Improved README.md
+- Improved README.md
 
 ### Added
 
--   CHANGELOG.md
+- CHANGELOG.md
 
 ## [1.0.0] - 2020-05-25
 

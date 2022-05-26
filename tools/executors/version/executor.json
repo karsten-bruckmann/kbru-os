@@ -1,8 +1,13 @@
 {
     "executors": {
         "compare": {
-            "implementation": "./impl",
-            "schema": "./schema.json",
+            "implementation": "./compare.impl",
+            "schema": "./compare.schema.json",
+            "description": "..."
+        },
+        "documented": {
+            "implementation": "./documented.impl",
+            "schema": "./documented.schema.json",
             "description": "..."
         }
     }
