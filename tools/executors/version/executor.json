@@ -1,0 +1,9 @@
+{
+  "executors": {
+    "compare": {
+      "implementation": "./impl",
+      "schema": "./schema.json",
+      "description": "..."
+    }
+  }
+}

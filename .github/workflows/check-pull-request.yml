@@ -10,6 +10,7 @@ jobs:
         strategy:
             matrix:
                 job:
+                    - affected:version-check
                     - format:check
                     - affected:lint
                     - affected:test

@@ -46,6 +46,12 @@
                     }
                 ]
             }
+        },
+        "version-check": {
+            "executor": "./tools/executors/version:compare",
+            "options": {
+                "packageName": "@kbru/form-effects"
+            }
         }
     },
     "tags": []
