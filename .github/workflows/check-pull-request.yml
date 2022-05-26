@@ -11,8 +11,6 @@ jobs:
             matrix:
                 job:
                     - format:check
-                    - affected --target=version-check
-                    - affected --target=changelog-check
                     - affected --target=lint
                     - affected --target=test
                     - affected --target=build
