@@ -1,0 +1,28 @@
+name: Check Release Pull Request
+on:
+    pull_request:
+        branches:
+            - release
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                job:
+                    - format:check
+                    - affected --target=version-check
+                    - affected --target=changelog-check
+                    - affected --target=lint
+                    - affected --target=test
+                    - affected --target=build
+        steps:
+            - uses: actions/checkout@v3
+              with:
+                  fetch-depth: 0
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 16
+                  registry-url: https://registry.npmjs.org/
+            - run: npm ci
+            - run: npx nx ${{ matrix.job }} --base=origin/main
