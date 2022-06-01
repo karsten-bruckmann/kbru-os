@@ -11,6 +11,8 @@ jobs:
             matrix:
                 job:
                     - format:check
+                    - affected --target=version-check
+                    - affected --target=changelog-check
                     - affected --target=lint
                     - affected --target=test
                     - affected --target=build
@@ -20,7 +22,7 @@ jobs:
                   fetch-depth: 0
             - uses: actions/setup-node@v3
               with:
-                  node-version: 14
+                  node-version: 16
                   registry-url: https://registry.npmjs.org/
             - run: npm ci
             - run: npx nx ${{ matrix.job }} --base=origin/main
