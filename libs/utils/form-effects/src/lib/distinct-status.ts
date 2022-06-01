@@ -1,5 +1,6 @@
 import { AbstractControl } from '@angular/forms';
-import { distinctUntilChanged, merge, of } from 'rxjs';
+import { merge, of } from 'rxjs';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 /**
  * Returns an Observable of the form status starting with the
