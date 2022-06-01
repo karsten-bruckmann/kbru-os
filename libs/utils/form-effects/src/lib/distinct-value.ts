@@ -1,5 +1,6 @@
-import { AbstractControl } from '@angular/forms';
-import { distinctUntilChanged, merge, of } from 'rxjs';
+import { AbstractControl } from "@angular/forms";
+import { merge, of } from "rxjs";
+import { distinctUntilChanged } from "rxjs/operators";
 
 /**
  * Returns an Observable of the value of control starting with the current
@@ -8,6 +9,6 @@ import { distinctUntilChanged, merge, of } from 'rxjs';
  * changing the value
  */
 export const distinctValue = (control: AbstractControl) =>
-    merge(of(control.value), control.valueChanges).pipe(
-        distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b))
-    );
+  merge(of(control.value), control.valueChanges).pipe(
+    distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b))
+  );

@@ -1,9 +1,125 @@
 {
-    "$schema": "./node_modules/nx/schemas/workspace-schema.json",
-    "version": 2,
-    "projects": {
-        "control-props": "libs/utils/control-props",
-        "form-effects": "libs/utils/form-effects",
-        "showcases-form": "apps/showcases/form"
+  "version": 1,
+  "projects": {
+    "form-effects": {
+      "projectType": "library",
+      "root": "libs/utils/form-effects",
+      "sourceRoot": "libs/utils/form-effects/src",
+      "prefix": "kbru",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/utils/form-effects/tsconfig.lib.json",
+            "project": "libs/utils/form-effects/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/utils/form-effects/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/utils/form-effects/tsconfig.lib.json",
+              "libs/utils/form-effects/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/utils/form-effects/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/utils/form-effects/jest.config.js",
+            "tsConfig": "libs/utils/form-effects/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/utils/form-effects/src/test-setup.ts"
+          }
+        },
+        "publish": {
+          "builder": "nx:run-commands",
+          "options": {
+            "commands": [
+              {
+                "command": "npm publish dist/libs/utils/form-effects --public"
+              }
+            ]
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "control-props": {
+      "projectType": "library",
+      "root": "libs/utils/control-props",
+      "sourceRoot": "libs/utils/control-props/src",
+      "prefix": "kbru",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/utils/control-props/tsconfig.lib.json",
+            "project": "libs/utils/control-props/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/utils/control-props/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/utils/control-props/tsconfig.lib.json",
+              "libs/utils/control-props/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/utils/control-props/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/utils/control-props/jest.config.js",
+            "tsConfig": "libs/utils/control-props/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/utils/control-props/src/test-setup.ts"
+          }
+        },
+        "publish": {
+          "builder": "nx:run-commands",
+          "options": {
+            "commands": [
+              {
+                "command": "npm publish dist/libs/utils/control-props --public"
+              }
+            ]
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
     }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  }
 }
