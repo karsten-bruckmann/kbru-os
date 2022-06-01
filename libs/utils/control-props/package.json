@@ -1,18 +1,18 @@
 {
-  "name": "@kbru/control-props",
-  "author": "Karsten Bruckmann <karsten.bruckmann@gmail.com>",
-  "license": "MIT",
-  "description": "Define custom properties on Angular's reactive form controls",
-  "version": "1.0.1",
-  "homepage": "https://github.com/karsten-bruckmann/kbru-os/tree/main/libs/utils/control-props#readme",
-  "repository": "https://github.com/karsten-bruckmann/kbru-os/tree/main/libs/utils/control-props",
-  "bugs": {
-    "url": "https://github.com/karsten-bruckmann/kbru-os/labels/control-props"
-  },
-  "peerDependencies": {
-    "@angular/forms": "^9.0.0"
-  },
-  "dependencies": {
-    "tslib": "^1.10.0"
-  }
+    "name": "@kbru/control-props",
+    "author": "Karsten Bruckmann <karsten.bruckmann@gmail.com>",
+    "license": "MIT",
+    "description": "Define custom properties on Angular's reactive form controls",
+    "version": "1.0.1",
+    "homepage": "https://github.com/karsten-bruckmann/kbru-os/tree/main/libs/utils/control-props#readme",
+    "repository": "https://github.com/karsten-bruckmann/kbru-os/tree/main/libs/utils/control-props",
+    "bugs": {
+        "url": "https://github.com/karsten-bruckmann/kbru-os/labels/control-props"
+    },
+    "peerDependencies": {
+        "@angular/forms": "^9.0.0 | ^10.0.0 | ^11.0.0 | ^12.0.0 | ^13.0.0"
+    },
+    "dependencies": {
+        "tslib": "^2.3.0"
+    }
 }

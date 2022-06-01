@@ -1,32 +1,56 @@
 {
-  "npmScope": "kbru",
-  "affected": {
-    "defaultBase": "main"
-  },
-  "implicitDependencies": {
-    "angular.json": "*",
-    "package.json": {
-      "dependencies": "*",
-      "devDependencies": "*"
+    "$schema": "./node_modules/nx/schemas/nx-schema.json",
+    "npmScope": "kbru",
+    "affected": {
+        "defaultBase": "main"
     },
-    "tsconfig.json": "*",
-    "tslint.json": "*",
-    "nx.json": "*"
-  },
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
-      }
-    }
-  },
-  "projects": {
-    "form-effects": {
-      "tags": []
+    "cli": {
+        "defaultCollection": "@nrwl/angular",
+        "packageManager": "npm"
     },
-    "control-props": {
-      "tags": []
+    "implicitDependencies": {
+        "package.json": {
+            "dependencies": "*",
+            "devDependencies": "*"
+        },
+        ".eslintrc.json": "*"
+    },
+    "tasksRunnerOptions": {
+        "default": {
+            "runner": "@nrwl/nx-cloud",
+            "options": {
+                "cacheableOperations": ["build", "lint", "test", "e2e"],
+                "accessToken": "MTkzYzAxYzAtNmI4Ny00MzFkLTg1N2ItMTY5YzUzYzAxNDMxfHJlYWQtd3JpdGU="
+            }
+        }
+    },
+    "targetDependencies": {
+        "build": [
+            {
+                "target": "build",
+                "projects": "dependencies"
+            }
+        ],
+        "publish": [
+            {
+                "target": "build",
+                "projects": "self"
+            }
+        ]
+    },
+    "generators": {
+        "@nrwl/angular:application": {
+            "style": "scss",
+            "linter": "eslint",
+            "unitTestRunner": "jest",
+            "e2eTestRunner": "cypress"
+        },
+        "@nrwl/angular:library": {
+            "linter": "eslint",
+            "unitTestRunner": "jest"
+        },
+        "@nrwl/angular:component": {
+            "style": "scss"
+        }
     }
-  }
 }
