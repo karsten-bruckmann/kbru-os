@@ -1,7 +1,12 @@
 import { createEffectAwareForm } from "./create-effect-aware-form";
 import { cold } from "jest-marbles";
 import { FormGroup } from "@angular/forms";
-import { firstValueFrom, NEVER } from "rxjs";
+import { NEVER, Observable } from "rxjs";
+import { first } from "rxjs/operators";
+
+function firstValueFrom<T>(obs$: Observable<T>): Promise<T> {
+  return obs$.pipe(first()).toPromise();
+}
 
 describe("createEffectAwareForm", () => {
   it("merges all effects", () => {

@@ -1,7 +1,8 @@
 import { distinctStatus } from "./distinct-status";
 import { FormControl } from "@angular/forms";
 import { cold } from "jest-marbles";
-import { map, timer } from "rxjs";
+import { timer } from "rxjs";
+import { map } from "rxjs/operators";
 
 describe("distinctStatus", () => {
   xit("emits the initial valid status", () => {

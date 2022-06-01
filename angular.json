@@ -1,102 +1,6 @@
 {
   "version": 1,
   "projects": {
-    "showcases-form": {
-      "projectType": "application",
-      "schematics": {
-        "@nrwl/angular:component": {
-          "style": "scss"
-        }
-      },
-      "root": "apps/showcases/form",
-      "sourceRoot": "apps/showcases/form/src",
-      "prefix": "kbru",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist/apps/showcases/form",
-            "index": "apps/showcases/form/src/index.html",
-            "main": "apps/showcases/form/src/main.ts",
-            "polyfills": "apps/showcases/form/src/polyfills.ts",
-            "tsConfig": "apps/showcases/form/tsconfig.app.json",
-            "aot": true,
-            "assets": [
-              "apps/showcases/form/src/favicon.ico",
-              "apps/showcases/form/src/assets"
-            ],
-            "styles": ["apps/showcases/form/src/styles.scss"],
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "apps/showcases/form/src/environments/environment.ts",
-                  "with": "apps/showcases/form/src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "showcases-form:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "showcases-form:build:production"
-            }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "showcases-form:build"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "apps/showcases/form/tsconfig.app.json",
-              "apps/showcases/form/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!apps/showcases/form/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "apps/showcases/form/jest.config.js",
-            "tsConfig": "apps/showcases/form/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "apps/showcases/form/src/test-setup.ts"
-          }
-        }
-      }
-    },
     "form-effects": {
       "projectType": "library",
       "root": "libs/utils/form-effects",
@@ -217,6 +121,5 @@
     "@nrwl/angular:library": {
       "unitTestRunner": "jest"
     }
-  },
-  "defaultProject": "showcases-form"
+  }
 }
