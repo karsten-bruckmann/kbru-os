@@ -1,7 +1,7 @@
 ---
-name: "@kbru/form-effects"
-about: "@kbru/form-effects"
-title: ""
+name: '@kbru/form-effects'
+about: '@kbru/form-effects'
+title: ''
 labels: form-effects
-assignees: ""
+assignees: ''
 ---
