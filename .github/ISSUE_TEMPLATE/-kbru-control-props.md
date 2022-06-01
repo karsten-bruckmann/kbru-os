@@ -1,10 +1,7 @@
 ---
 name: "@kbru/control-props"
 about: "@kbru/control-props"
-title: ''
+title: ""
 labels: control-props
-assignees: ''
-
+assignees: ""
 ---
-
-

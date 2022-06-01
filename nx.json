@@ -17,12 +17,7 @@
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
       "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e"
-        ]
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
       }
     }
   },
@@ -32,9 +27,7 @@
     },
     "showcases/form-e2e": {
       "tags": [],
-      "implicitDependencies": [
-        "showcases-form"
-      ]
+      "implicitDependencies": ["showcases-form"]
     },
     "form-effects": {
       "tags": []

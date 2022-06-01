@@ -1,10 +1,8 @@
 import { AsyncValidatorFn, FormControl, ValidatorFn } from "@angular/forms";
 import { PropsAware } from "./props-aware.type";
 
-export class FormControlWithProps<T>
-  extends FormControl
-  implements PropsAware<T>
-{
+export class FormControlWithProps<T> extends FormControl
+  implements PropsAware<T> {
   constructor(
     private readonly props: T,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
