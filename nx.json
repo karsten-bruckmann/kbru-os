@@ -25,10 +25,6 @@
     "showcases-form": {
       "tags": []
     },
-    "showcases/form-e2e": {
-      "tags": [],
-      "implicitDependencies": ["showcases-form"]
-    },
     "form-effects": {
       "tags": []
     },
