@@ -15,7 +15,8 @@
           },
           "configurations": {
             "production": {
-              "tsConfig": "libs/utils/form-effects/tsconfig.lib.prod.json"
+              "tsConfig": "libs/utils/form-effects/tsconfig.lib.prod.json",
+              "aot": false
             }
           }
         },
@@ -69,7 +70,8 @@
           },
           "configurations": {
             "production": {
-              "tsConfig": "libs/utils/control-props/tsconfig.lib.prod.json"
+              "tsConfig": "libs/utils/control-props/tsconfig.lib.prod.json",
+              "aot": false
             }
           }
         },

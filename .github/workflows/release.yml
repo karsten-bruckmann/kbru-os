@@ -48,6 +48,7 @@ jobs:
                   node-version: 14
                   registry-url: https://registry.npmjs.org/
             - run: npm ci
+            - run: npx nx affected --target=build --base=${{ steps.last_successful_commit.outputs.commit_hash }}
             - run: npx nx affected --target=publish --base=${{ steps.last_successful_commit.outputs.commit_hash }}
               env:
                   NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
