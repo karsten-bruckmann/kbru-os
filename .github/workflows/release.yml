@@ -26,7 +26,7 @@ jobs:
                   fetch-depth: 0
             - uses: actions/setup-node@v3
               with:
-                  node-version: 16
+                  node-version: 14
                   registry-url: https://registry.npmjs.org/
             - run: npm ci
             - run: npx nx ${{ matrix.job }} --base=${{ steps.last_successful_commit.outputs.commit_hash }}
@@ -45,7 +45,7 @@ jobs:
                   fetch-depth: 0
             - uses: actions/setup-node@v3
               with:
-                  node-version: 16
+                  node-version: 14
                   registry-url: https://registry.npmjs.org/
             - run: npm ci
             - run: npx nx affected --target=publish --base=${{ steps.last_successful_commit.outputs.commit_hash }}
